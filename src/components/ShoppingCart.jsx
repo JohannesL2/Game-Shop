@@ -61,7 +61,6 @@ return (
           <h3>Total: <strong>{getCartTotal()} kr</strong></h3>
         </div>
         <button onClick={() => clearCart()}>Clear Cart</button>
-        <button>Proceed to Checkout</button>
 
         <button onClick={handleFakeOrder} className="p-4 rounded-lg placeOrderBtn">Place Order</button>
         {orderConfirmed && (
