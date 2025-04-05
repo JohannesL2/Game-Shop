@@ -1,11 +1,22 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/cart";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const {cartItems, addToCart, removeFromCart, clearCart, getCartTotal} = useContext(CartContext);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleFakeOrder = () => {
+    setOrderConfirmed(true)
+    setTimeout(() => {
+    setOrderConfirmed(false)
+    clearCart()
+    navigate('/')
+
+    }, 5000);
+  }
 
 return (
   <div>
@@ -51,6 +62,19 @@ return (
         </div>
         <button onClick={() => clearCart()}>Clear Cart</button>
         <button>Proceed to Checkout</button>
+
+        <button onClick={handleFakeOrder} className="p-4 rounded-lg placeOrderBtn">Place Order</button>
+        {orderConfirmed && (
+          <div>
+            <p className="mt-2 text-green-700 font-semibold">Your order has been placed successfully!🎉</p>
+            <h2 className="font-semibold">Order Summary:</h2>
+            {cartItems.map((item) => (
+              <li key={item.id}>
+              {item.title}
+              </li>
+            ))}
+            </div>
+        )}
         </div>
     )}
   </div>

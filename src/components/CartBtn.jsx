@@ -33,7 +33,7 @@ const Cartbtn = () => {
   return (
     <nav>
       <button onClick={handleClick}
-      className={`fixed top-5 right-5 p-6 shadow-md ${Animation ? 'scale-110 transition-transform duration-300 ease-in-out' : 'scale-100'}
+      className={`fixed top-5 right-5 p-6 shadow-md z-1 transition-transform duration-300 ease-in-out hover:scale-110 ${Animation ? 'scale-110 transition-transform duration-300 ease-in-out' : 'scale-100'}
       `}
       >
         {location.pathname === '/cart' ? '⬅️' : '🛒'}

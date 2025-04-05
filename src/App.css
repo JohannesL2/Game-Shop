@@ -1,11 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: Lato, sans-serif;
 }
 
 
@@ -43,4 +45,35 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.embla {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.embla__viewport {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.embla__slide {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.add-to-cartBtn {
+  background-color: rgb(117, 255, 117);
+}
+
+.loginBtn {
+  background-color: rgb(48, 49, 42);
+  color: white;
 }
