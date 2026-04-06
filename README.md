@@ -1,12 +1,17 @@
-# React + Vite
+#LevelUp Game Shop
+En dynamisk spelbutik byggd med **React** och **Firebase**, som hämtar data från **RAWG Video Games Database API**.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##Funktioner
+- **API-integration:** Hämtar tusentals spel, betyg och genrer i realtid från RAWG.
+- **Firebase Auth:** Möjlighet för användare att logga in/registrera sig.
+- **Kundvagn & Checkout:** Hantering av spelval och prissättning.
+- **Sök & Filtrering:** Hitta spel baserat på plattform eller kategori.
 
-Currently, two official plugins are available:
+##Teknikstack
+- **Frontend:** React.js
+- **Backend/Database:** Firebase (Firestore & Auth)
+- **Styling:** CSS / Tailwind (Välj den du använde)
+- **API:** RAWG API
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##Live Demo
+[levelupgameshop.netlify.app](https://levelupgameshop.netlify.app/)
