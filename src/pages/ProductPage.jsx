@@ -72,7 +72,7 @@ return (
           {screenshots.map((screenshot, index) => (
             <div className="embla__slide" key={index}>
       <img
-      src={screenshot.image}
+      src={typeof screenshot === 'string' ? screenshot : screenshot.image}
       className='w-full h-72 object-cover shadow-md'
       />
             </div>
