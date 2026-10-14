@@ -14,21 +14,30 @@ const {addToCart} = useContext(CartContext)
     const [filteredGenre, setFilteredGenre] = useState("All")
 
 useEffect(() => {
-  const fetchGames = async () => {
-  try {
-    await fetchAndStore();
-    const gamesSnapshot = await getDocs(collection(db, "games"));
-    const gamesList = [];
-    gamesSnapshot.forEach((doc) => {
-      gamesList.push({id: doc.id, ...doc.data()})
-    })
-    setGames(gamesList)
-  } catch (error) {
-    console.error("error fetching", error);
+  const loadGames = async () => {
+    try {
+      const gamesSnapshot = await getDocs(collection(db, "games"));
+      const gamesList = [];
+      gamesSnapshot.forEach((doc) => {
+        gamesList.push({id: doc.id, ...doc.data()})
+      })
+      setGames(gamesList)
+    } catch (error) {
+      console.error("Error loading games from Firebase", error);
+    }
   }
-}
 
-    fetchGames();
+  const syncGames = async () => {
+    try {
+      await fetchAndStore();
+      await loadGames();
+    } catch (error) {
+      console.error("Error syncing games from RAWG", error);
+    }
+  }
+
+  loadGames();
+  syncGames();
   }, []);
 
   const filteredGames = games.filter((game) =>

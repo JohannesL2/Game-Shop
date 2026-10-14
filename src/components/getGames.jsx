@@ -31,9 +31,11 @@ const fetchAndStoreGames = async () => {
   for (let game of games) {
     const existingGame = existingGames.get(game.name);
     if (existingGame) {
-      if (!Array.isArray(existingGame.screenshots)) {
+      if (!Array.isArray(existingGame.screenshots) || existingGame.screenshots.length === 0) {
         const screenshots = await fetchScreenshots(game.id);
-        await updateDoc(doc(db, "games", existingGame.id), { screenshots });
+        if (screenshots.length > 0) {
+          await updateDoc(doc(db, "games", existingGame.id), { screenshots });
+        }
       }
       continue;
     }
