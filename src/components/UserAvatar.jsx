@@ -25,19 +25,12 @@ const UserAvatar = () => {
   }
 
   return (
-  <div className='absolute top-5 right-30 flex items-center space-x-2 bg-gray-300 p-2 rounded-lg'>
-          <img
-        src={user.photoURL || "avatar.svg"}
-        alt="User Avatar"
-        className="w-15 h-15 rounded-full border border-gray-700 p-2"
-      />
-    <h2> <strong>User:</strong> {user.email}</h2>
-    <button 
-    onClick={handleSignOut}
-    className="p-4 shadow-md z-1 transition-transform duration-300 ease-in-out hover:scale-110 loginBtn">
-    Sign Out🚪</button>
+    <div className="user-menu">
+      <img src={user.photoURL || '/avatar.svg'} alt="" className="user-menu__avatar" />
+      <span className="user-menu__email">{user.email}</span>
+      <button onClick={handleSignOut} className="header-action">Sign out</button>
     </div>
-  )
+  );
 }
 
 export default UserAvatar

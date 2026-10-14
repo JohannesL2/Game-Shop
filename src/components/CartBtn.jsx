@@ -8,8 +8,7 @@ const Cartbtn = () => {
   const {cartItems} = useContext(CartContext);
 
 
-  {/*Animation för cartBtn*/}
-  const [Animation, setAnimation] = useState(false);
+  const [animation, setAnimation] = useState(false);
 
   useEffect(() => {
     if (cartItems.length > 0) {
@@ -33,12 +32,12 @@ const Cartbtn = () => {
   return (
     <nav>
       <button onClick={handleClick}
-      className={`fixed top-5 right-5 p-6 shadow-md z-1 transition-transform duration-300 ease-in-out hover:scale-110 ${Animation ? 'scale-110 transition-transform duration-300 ease-in-out' : 'scale-100'}
-      `}
+      className={`header-action ${animation ? 'header-action--bump' : ''}`}
+      aria-label={location.pathname === '/cart' ? 'Back to games' : `Shopping cart, ${cartItems.length} items`}
       >
-        {location.pathname === '/cart' ? '⬅️' : '🛒'}
+        {location.pathname === '/cart' ? '← Back' : 'Cart'}
         {cartItems.length > 0 && location.pathname !== '/cart' && (
-          <span className='absolute -top-3 -right-3 bg-red-700 text-white size-6 rounded-md'>
+          <span className='cart-count'>
             {cartItems.length}
           </span>
         )}

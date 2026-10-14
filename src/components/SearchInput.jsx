@@ -1,57 +1,31 @@
-import React, {useState, useEffect} from 'react'
-import {db} from "../firebase"
-import {collection, getDocs} from "firebase/firestore"
-
-const SearchInput = ({search, setSearch, filteredGenre, setFilteredGenre}) => {
-  const [games, setGames] = useState([])
-  const [filteredGames, setFilteredGames] = useState([])
-  const genreList = ["All", ...new Set(games.map((game) => game.genre))];
-
-  useEffect(() => {
-    const fetchGames = async () => {
-      const gamesCollection = collection(db, "games");
-      const gameSnapshot = await getDocs(gamesCollection);
-      const gameList = gameSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }))
-      setGames(gameList)
-      setFilteredGames(gameList)
-    }
-    fetchGames();
-  }, []);
-
-  useEffect(() => {
-    let filtered = games;
-
-    if (search.trim() !== "") {
-      filtered = filtered.filter((game) => 
-      game.title.toLowerCase().includes(search.toLowerCase())
-      )
-    }
-
-    if (filteredGenre !== "All") {
-      filtered = filtered.filter((game) => game.genre === filteredGenre)
-    }
-
-      setFilteredGames(filtered)
-  }, [search, games, filteredGenre])
+const SearchInput = ({ search, setSearch, filteredGenre, setFilteredGenre, games }) => {
+  const genreList = ['All', ...new Set(games.map((game) => game.genre).filter(Boolean))];
 
   return (
-    <div>
-      <div className='flex flex-col'>
-      <input className='flex flex-col p-4 bg-gray-200 text-sm rounded-lg outline-none focus:shadow-md' placeholder='Search:' type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
+    <div className="catalog-controls">
+      <label className="search-field">
+        <span className="search-field__icon" aria-hidden="true">⌕</span>
+        <input
+          placeholder="Search games..."
+          type="search"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          aria-label="Search games"
+        />
+      </label>
 
-      <select className='w-full p-4 mt-4 bg-gray-200 text-sm rounded-lg outline-none focus:shadow-md' value={filteredGenre} onChange={(e) => setFilteredGenre(e.target.value)}>
-        {genreList.map((genre) => (
-          <option key={genre} value={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
-      </div>
+      <label className="genre-filter">
+        <span className="sr-only">Filter by genre</span>
+        <select value={filteredGenre} onChange={(event) => setFilteredGenre(event.target.value)}>
+          {genreList.map((genre) => (
+            <option key={genre} value={genre}>
+              {genre === 'All' ? 'All genres' : genre}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
-  )
-}
+  );
+};
 
-export default SearchInput
+export default SearchInput;

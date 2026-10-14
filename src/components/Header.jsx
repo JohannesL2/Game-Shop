@@ -1,35 +1,37 @@
-import { useState, useEffect } from "react"
-import Cartbtn from "./CartBtn"
-import { Link } from "react-router-dom"
-import LoginBtn from "./LoginBtn"
-import UserAvatar from "./UserAvatar"
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Cartbtn from './CartBtn';
+import LoginBtn from './LoginBtn';
+import UserAvatar from './UserAvatar';
 
 const Header = () => {
-    const [user, setUser] = useState(null);
-    const auth = getAuth();
-  
-    useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-      });
-      return () => unsubscribe();
-    }, [auth]);
+  const [user, setUser] = useState(null);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, setUser);
+    return () => unsubscribe();
+  }, [auth]);
 
   return (
-    <header>
-      <div className="container mx-auto flex items-center">
-      <div className='flex items-center justify-center space-x-3 mb-6'>
-      <Link to='/'>
-      <img className='size-30' src="Logo.png" alt="" />
-      </Link>
-      <h1 className='text-3xl font-bold'>LevelUp Store</h1>
-      </div>
-      <Cartbtn/>
-      {user ? <UserAvatar/> : <LoginBtn/>}
+    <header className="site-header">
+      <div className="site-header__inner">
+        <Link className="brand" to="/" aria-label="LevelUp Store home">
+          <img src="/Logo.png" alt="" />
+          <span>LevelUp <strong>Store</strong></span>
+        </Link>
+        <nav className="site-header__nav" aria-label="Main navigation">
+          <Link to="/">Discover</Link>
+          <a href="/#games">Browse games</a>
+        </nav>
+        <div className="site-header__actions">
+          <Cartbtn />
+          {user ? <UserAvatar /> : <LoginBtn />}
+        </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

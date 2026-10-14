@@ -15,7 +15,9 @@ const LoginBtn = () => {
 
   return (
     <div>
-      <button onClick={handleClick} className='fixed top-5 right-25 p-4 shadow-md z-1 transition-transform duration-300 ease-in-out hover:scale-110 loginBtn'>{location.pathname === '/LoginPage' ? '⬅️' : '🔐'}</button>
+      <button onClick={handleClick} className="header-action">
+        {location.pathname === '/LoginPage' ? 'Back' : 'Sign in'}
+      </button>
     </div>
   )
 }
