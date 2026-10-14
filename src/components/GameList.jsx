@@ -9,13 +9,14 @@ import SearchInput from './SearchInput';
 
 const GameList = () => {
 const [games, setGames] = useState([]);
-const {cartItems, addToCart} = useContext(CartContext)
+const {addToCart} = useContext(CartContext)
   const [search, setSearch] = useState("")
     const [filteredGenre, setFilteredGenre] = useState("All")
 
 useEffect(() => {
   const fetchGames = async () => {
   try {
+    await fetchAndStore();
     const gamesSnapshot = await getDocs(collection(db, "games"));
     const gamesList = [];
     gamesSnapshot.forEach((doc) => {
@@ -27,7 +28,6 @@ useEffect(() => {
   }
 }
 
-    fetchAndStore();
     fetchGames();
   }, []);
 
