@@ -1,6 +1,7 @@
 # LevelUp Game Shop
 
-<img width="800" alt="game-shop-screenshot" src="https://github.com/user-attachments/assets/809163c7-0193-411d-9d26-81307538f075" />
+<img width="800" alt="levelupstore-video" src="https://github.com/user-attachments/assets/56eb0172-b261-4101-a223-0094b6ec712c" />
+
 
 A dynamic e-commerce platform for video games, built with **React** and powered by the **RAWG Video Games Database API**. The application features a robust backend integration using **Firebase** for data management and user experience.
 
