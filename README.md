@@ -53,4 +53,4 @@ A dynamic e-commerce platform for video games, built with **React** and powered 
 
    ```bash
 
-   git clone https://github.com/JohannesL2/levelup-game-shop.git
+   git clone https://github.com/JohannesL2/Game-Shop.git
