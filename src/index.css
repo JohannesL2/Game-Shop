@@ -1,11 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   font-family: Inter, Lato, system-ui, sans-serif;
   color: #f5f6f8;
-  background: #17191d;
+  background: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

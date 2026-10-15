@@ -19,15 +19,15 @@ const Header = () => {
       <div className="site-header__inner">
         <Link className="brand" to="/" aria-label="LevelUp Store home">
           <img src="/Logo.png" alt="" />
-          <span>LevelUp <strong>Store</strong></span>
+          <span className="text-white">LevelUp <strong>store</strong></span>
         </Link>
         <nav className="site-header__nav" aria-label="Main navigation">
           <Link to="/">Discover</Link>
           <a href="/#games">Browse games</a>
         </nav>
         <div className="site-header__actions">
-          <Cartbtn />
           {user ? <UserAvatar /> : <LoginBtn />}
+          <Cartbtn />
         </div>
       </div>
     </header>

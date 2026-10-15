@@ -1,4 +1,4 @@
-import {db, auth} from "./firebase";
+import {db} from "./firebase";
 import {collection, getDocs, getDoc, doc, setDoc, addDoc, deleteDoc} from "firebase/firestore"
 
 import React from 'react'

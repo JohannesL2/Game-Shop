@@ -6,6 +6,7 @@ import StarRating from './StarRating';
 import { CartContext } from '../context/cart';
 import { Link } from 'react-router-dom';
 import SearchInput from './SearchInput';
+import toast, { Toaster } from 'react-hot-toast';
 
 const GameList = () => {
   const [games, setGames] = useState([]);
@@ -41,10 +42,29 @@ const GameList = () => {
     };
   }, []);
 
+  const handleAddToCart = (game) => {
+    addToCart(game);
+    toast.success(`${game.title} has been added to cart!`, {
+      style: {
+        background: '#17191d',
+        color: '#fff',
+        border: '1px solid #282c34',
+        padding: '16px',
+        fontSize: '14px',
+        borderRadius: '8px'
+      },
+      iconTheme: {
+        primary: '#ff7045',
+        secondary: '#fff',
+      },
+    });
+  };
+
   const filteredGames = games.filter((game) =>
     game.title?.toLowerCase().includes(search.toLowerCase()) &&
     (filteredGenre === 'All' || game.genre === filteredGenre)
   );
+  
   const featuredGame = games.reduce(
     (best, game) => Number(game.rating || 0) > Number(best.rating || 0) ? game : best,
     games[0]
@@ -52,9 +72,11 @@ const GameList = () => {
 
   return (
     <main className="storefront">
+      <Toaster position="top-right" />
+
       {featuredGame && (
         <section
-          className="featured-game"
+          className="featured-game bg-fixed"
           style={{ backgroundImage: `url("${featuredGame.image}")` }}
           aria-label={`Featured game: ${featuredGame.title}`}
         >
@@ -73,7 +95,7 @@ const GameList = () => {
               </Link>
               <button
                 className="button button--secondary"
-                onClick={() => addToCart(featuredGame)}
+                onClick={() => handleAddToCart(featuredGame)}
               >
                 Add to cart
               </button>
@@ -86,7 +108,7 @@ const GameList = () => {
         <div className="section-heading">
           <div>
             <span className="eyebrow">Find your next favorite</span>
-            <h2>Popular games</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Popular games</h2>
           </div>
           <span className="game-count">{filteredGames.length} games</span>
         </div>
@@ -102,8 +124,6 @@ const GameList = () => {
         {filteredGames.length > 0 ? (
           <div className="game-grid">
             {filteredGames.map((game) => {
-              const ratingValue = Math.round((game.rating || 0) / 0.5) * 0.5;
-
               return (
                 <article className="game-card" key={game.id}>
                   <Link className="game-card__image-link" to={`/game/${game.id}`}>
@@ -120,13 +140,19 @@ const GameList = () => {
                       <span className="game-card__price">{game.price} SEK</span>
                     </div>
                     <div className="game-card__footer">
-                      <StarRating value={ratingValue} />
                       <button
-                        className="game-card__add"
-                        onClick={() => addToCart(game)}
+                        className="game-card__watch-trailer"
+                        onClick={() => handleAddToCart(game)}
                         aria-label={`Add ${game.title} to cart`}
                       >
-                        Add +
+                        Watch trailer
+                      </button>
+                      <button
+                        className="game-card__add"
+                        onClick={() => handleAddToCart(game)}
+                        aria-label={`Add ${game.title} to cart`}
+                      >
+                        Add to cart
                       </button>
                     </div>
                   </div>
